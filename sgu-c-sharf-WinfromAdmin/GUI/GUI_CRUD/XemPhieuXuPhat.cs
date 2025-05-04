@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using sgu_c_sharf_WinfromAdmin.Models;
 
 namespace sgu_c_sharf_WinfromAdmin.GUI.GUI_CRUD
 {
@@ -16,7 +17,24 @@ namespace sgu_c_sharf_WinfromAdmin.GUI.GUI_CRUD
         {
             InitializeComponent();
         }
-
+        public FormXemPhieuXuphat(PhieuXuPhatDetailDTO phieuXuPhat)
+        {
+            InitializeComponent();
+            _phieuXuPhat = phieuXuPhat;
+            LoadPhieuXuPhatDetails();
+        }
+        private void LoadPhieuXuPhatDetails()
+        {
+            // Hiển thị thông tin phiếu xử phạt lên các control
+            txtMaPhieu.Text = _phieuXuPhat.Id.ToString();
+            txtMoTa.Text = _phieuXuPhat.MoTa;
+            txtMucPhat.Text = _phieuXuPhat.MucPhat?.ToString() ?? "0";
+            txtMaThanhVien.Text = _phieuXuPhat.IdThanhVien.ToString();
+            txtTenThanhVien.Text = _phieuXuPhat.TenThanhVien;
+            dataTimeViPham.Value = _phieuXuPhat.NgayViPham;
+            cbbTrangThai.SelectedItem = _phieuXuPhat.TrangThai.ToString();
+        }
+        
         private void label2_Click(object sender, EventArgs e)
         {
 

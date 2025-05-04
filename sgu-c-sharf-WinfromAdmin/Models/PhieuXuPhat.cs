@@ -1,34 +1,31 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace sgu_c_sharf_backend.Models.PhieuXuPhat
+namespace sgu_c_sharf_WinfromAdmin.Models
 {
-    [Table("PhieuXuPhat")]
     public class PhieuXuPhat
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public uint Id { get; set; } // Sử dụng uint để phù hợp với INT UNSIGNED
 
         [Required]
-        public TrangThaiPhieuXuPhatEnum TrangThai { get; set; }
+        public TrangThaiPhieuXuPhatEnum TrangThai { get; set; } = TrangThaiPhieuXuPhatEnum.CHUAXULY;
 
         [Required]
         public DateTime NgayViPham { get; set; } = DateTime.Now;
 
         [Required]
         [MaxLength(255)]
-        public string MoTa { get; set; }
+        public string MoTa { get; set; } = string.Empty;
 
-        public uint? ThoiHanXuPhat { get; set; } // Sử dụng uint? để phù hợp với INT UNSIGNED
-        public uint? MucPhat { get; set; } // Sử dụng uint? để phù hợp với INT UNSIGNED
+        public uint? ThoiHanXuPhat { get; set; } // Sử dụng uint? để phù hợp với INT UNSIGNED NULL
+        public uint? MucPhat { get; set; } // Sử dụng uint? để phù hợp với INT UNSIGNED NULL
 
         [Required]
-        [ForeignKey("ThanhVien")]
         public uint IdThanhVien { get; set; } // Sử dụng uint để phù hợp với INT UNSIGNED
 
-        public virtual ThanhVien.ThanhVien ThanhVien { get; set; } // Sử dụng virtual để hỗ trợ Lazy Loading
+        public string TenThanhVien { get; set; } = string.Empty; // Tên thành viên để hiển thị trong giao diện
+        public DateTime? NgayXuPhat { get; set; } // Thêm thuộc tính NgayXuPhat để khớp với form
     }
 
     public class PhieuXuPhatCreateDTO
@@ -41,7 +38,7 @@ namespace sgu_c_sharf_backend.Models.PhieuXuPhat
 
         [Required]
         [MaxLength(255)]
-        public string MoTa { get; set; }
+        public string MoTa { get; set; } = string.Empty;
 
         public uint? ThoiHanXuPhat { get; set; } // Sử dụng uint?
         public uint? MucPhat { get; set; } // Sử dụng uint?
@@ -53,13 +50,14 @@ namespace sgu_c_sharf_backend.Models.PhieuXuPhat
     public class PhieuXuPhatDetailDTO
     {
         public uint Id { get; set; } // Sử dụng uint
-        public TrangThaiPhieuXuPhatEnum TrangThai { get; set; }
-        public DateTime NgayViPham { get; set; }
-        public string MoTa { get; set; }
+        public TrangThaiPhieuXuPhatEnum TrangThai { get; set; } = TrangThaiPhieuXuPhatEnum.CHUAXULY;
+        public DateTime NgayViPham { get; set; } = DateTime.Now;
+        public string MoTa { get; set; } = string.Empty;
         public uint? ThoiHanXuPhat { get; set; } // Sử dụng uint?
         public uint? MucPhat { get; set; } // Sử dụng uint?
         public uint IdThanhVien { get; set; } // Sử dụng uint
-        public string TenThanhVien { get; set; } // Tên thành viên để hiển thị
+        public string TenThanhVien { get; set; } = string.Empty; // Tên thành viên để hiển thị
+        public DateTime? NgayXuPhat { get; set; } // Thêm thuộc tính NgayXuPhat để khớp với form
     }
 
     public class PhieuXuPhatUpdateDTO
@@ -75,12 +73,7 @@ namespace sgu_c_sharf_backend.Models.PhieuXuPhat
         public uint? MucPhat { get; set; } // Sử dụng uint?
 
         public uint? IdThanhVien { get; set; } // Sử dụng uint?
-    }
-
-    public class PhieuXuPhatDeleteDTO
-    {
-        [Required]
-        public uint Id { get; set; } // Sử dụng uint
+        public DateTime? NgayXuPhat { get; set; } // Thêm thuộc tính NgayXuPhat để khớp với form
     }
 
     public enum TrangThaiPhieuXuPhatEnum
